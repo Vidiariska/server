@@ -28,7 +28,15 @@ class ClassController {
 
   // GET
   static getClass(req, res) {
-    res.status(200).json({ message: "succesfully get data class" });
+    Class.findAll()
+      .then((data) => {
+        res
+          .status(200)
+          .json({ message: "succesfully get data class", datas: data });
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
   }
 
   //UPDATE
